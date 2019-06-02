@@ -1,0 +1,16 @@
+{
+	"terms": [
+		{
+			"name": "termin1",
+			"definition": "Ovo je definicija termina ucitanog iz jsona"
+		},
+		{
+			"name": "termin2",
+			"definition": "Ovo je definicija termina ucitanog iz jsona"
+		},
+		{
+			"name": "termin3",
+			"definition": "Ovo je definicija termina ucitanog iz jsona"
+		}
+	]
+}

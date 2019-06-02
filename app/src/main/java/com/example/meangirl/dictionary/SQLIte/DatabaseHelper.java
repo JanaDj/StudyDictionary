@@ -32,7 +32,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+Contract.TermsSchema.TABLE_NAME);
         onCreate(db);
     }
-
     /**
      * Copies the database file at the specified location over the current
      * internal application database.
