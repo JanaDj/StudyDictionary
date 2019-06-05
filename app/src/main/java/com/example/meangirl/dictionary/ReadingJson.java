@@ -1,6 +1,7 @@
 package com.example.meangirl.dictionary;
 
 import android.content.Context;
+import android.util.JsonReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,11 +21,9 @@ public class ReadingJson {
      * @throws IOException
      * @throws JSONException
      */
-    public static ArrayList<DictionaryItem> readDictJsonFile(Context context) throws IOException, JSONException {
-        String jsonText = readText(context, R.raw.test);
+    public static ArrayList<DictionaryItem> readDictJsonFile(Context context, String json) throws IOException, JSONException {
 
-        JSONObject jsonRoot = new JSONObject(jsonText);
-
+        JSONObject jsonRoot = new JSONObject(json);
         JSONArray jsonArray = jsonRoot.getJSONArray("terms");
         ArrayList<DictionaryItem> dictItems = new ArrayList<>();
 
@@ -36,6 +35,26 @@ public class ReadingJson {
             dictItems.add(dictTerm);
         }
         return dictItems;
+    }
+
+    /**
+     *
+     * @param is
+     * @return
+     */
+    public static String readJsonFile(InputStream is){
+        String json = null;
+        try {
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
     /**
      *

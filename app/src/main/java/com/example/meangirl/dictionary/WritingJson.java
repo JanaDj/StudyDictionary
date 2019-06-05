@@ -5,12 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.JsonWriter;
 import android.widget.Toast;
-
 import com.example.meangirl.dictionary.SQLIte.Contract;
 import com.example.meangirl.dictionary.SQLIte.DatabaseHelper;
-
 import java.io.IOException;
-import java.io.Writer;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class WritingJson {
@@ -19,11 +18,12 @@ public class WritingJson {
      * @param output
      * @throws IOException
      */
-    public static void writejsonStream(Writer output, Context context) throws IOException {
+    public static void writejsonStream(OutputStream output, Context context) throws IOException {
 
         ArrayList<DictionaryItem> dictItems = getItemsFromDB(context);
 
-        JsonWriter jsonWriter = new JsonWriter(output);
+        JsonWriter jsonWriter = new JsonWriter(new OutputStreamWriter(output));
+
 
         jsonWriter.beginObject(); //begins root
 
@@ -40,6 +40,7 @@ public class WritingJson {
         }
         jsonWriter.endArray();  //ends array of terms
         jsonWriter.endObject(); //ends the root
+        jsonWriter.close();
         Toast.makeText(context, jsonWriter.toString(), Toast.LENGTH_LONG).show();
     }
     /**
